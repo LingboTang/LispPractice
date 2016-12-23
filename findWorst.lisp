@@ -1,0 +1,13 @@
+(defun findWorst (Name default L)
+	(if (null L)
+		nil
+		(if  (eq (car (car L)) name)
+			(if (equal default 11)
+				if (< (toNumber (car (cdr (cdr (car L))))) (toNumber default))
+					(findWorst name (car (cdr (cdr (car L)))) (cdr L))
+					(findWorst name default (cdr L))
+			)
+		)
+		(findWorst name default (cdr L))
+	)
+)

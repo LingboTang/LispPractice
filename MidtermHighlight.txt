@@ -1,0 +1,76 @@
+---------   ---------
+|   |   |-> |   |   |-> c              the simplest form is: 
+---------   ---------                     
+|           |                         (((a))  (b . d) . c)
+V           V
+--------    --------
+|   | /|    |   |   |-> d
+--------    ---------
+|           |
+V           V
+--------      b
+|   | /|     
+--------    
+|
+V
+a 
+
+We have already seen that different s-expressoins may represent the same underlying machine level structure. What we see on the screen (the output of the Lisp interpreter) is the simplest, the one with the least number of dots. That is, Lisp accepts any valid s-expressions. But it always prints the simpliest s-exp (the interpreter applies a Lisp function that does so).
+
+E.g.
+             ---------   ---------
+             |   |   |-> |   | / |
+             ---------   ---------                      
+               |           |                        
+               V           V
+               a         ---------
+                         |   |   |-> d
+                         ---------
+                           |
+                           V
+                           b
+
+The full dot expression is (a . ((b . d) . nil))
+However, lisp will print the (a . (b . d))
+
+
+Why are they all equivalent?>
+Because if you apply the ***same sequence of car/cdr*** operations, you will get the same component from the structure they represent.
+
+Then let's imagine how a function could be stored in the lisp machine?
+(defun funcname(x y)
+	...
+	...            ; function body
+	...
+)
+
+---------   ---------   ---------                   ---------
+|   |   |-> |   |   |-> |   |   |-----------------> |   | / |
+---------   ---------   ---------                   --------- 
+|           |           |                           |
+V           V           V                           V
+defun        f-name     ---------    ---------       the body
+                        |   |   |    |   |   |
+                        ---------    ---------
+                        |            |
+                        V            V
+                        x            y
+
+
+(lambda xy|xxy)(lambda xz | xz) w a
+--> (lambda xz| xz) (lambda xz|xz) w a
+--> (lambda xz| xz) w a
+--> wa
+
+
+
+
+((Lxy | x(Ly|(+ y 2)) (Lfx|f(fx))) 5 <== plug (Lfx|f(fx)) in the position of x, let the whole function be a function respective to y
+(Ly|(Lfx|f(fx))(Ly|(+ y 2))) 5 <== 5 now becomes a constant without bounding, then it's irrelative to the function we can ignore that.	But need to apply
+									function y on the expression.
+(Lfx|f(fx)(Ly|(+ y 2))			<== Now (Ly|(+ y 2)) is on the position of f, then plug in the expression of y on x and let it be a function respective to x
+(Lx|(Ly|(+ y 2))((Ly|(+ y 2)) x)
+(Lx|(Ly | (+ y 2)) (+ x 2))		<== This time (+ x 2) is on the position of y
+(Lx|(+ (+ x 2) 2))				<== Concluded result
+
+
